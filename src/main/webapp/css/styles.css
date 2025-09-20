@@ -8,6 +8,7 @@
     --primary-hover: #e9eeec;
     --bk-primary: #90b3a8;
     
+    --hover: #f6f6f6;
     --background: #f5f3f3;
 
     --gray-outline: #e7e7e7;
@@ -19,7 +20,11 @@
     
     --yellow: #abab2f;
     --red: #d40101;
+    --red-hover: #e91717;
     --orange: #d75311;
+    --blue: #2c80cf;
+    --blue-hover: #1f68ac;
+    --gray: #888;
     --black: #000;
     --white: #fff;
 }
@@ -133,9 +138,52 @@ a.btn-outline:hover {
     text-underline-offset: 3px;
 }
 
-.text-center {
-    text-align: center;
-    vertical-align: middle;
+.btn-new {
+    background-color: var(--white);
+    color: var(--text-normal);
+    padding: 0.4em 1em;
+    border: 1px solid var(--primary);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-view {
+    background-color: var(--white);
+    color: var(--text-light);
+    padding: 0.4em 1em;
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-edit {
+    background-color: var(--white);
+    color: var(--blue);
+    padding: 0.4em 1em;
+    border: 1px solid var(--blue);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-delete {
+    background-color: var(--white);
+    color: var(--red);
+    padding: 0.4em 1em;
+    border: 1px solid var(--red);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-new:hover,
+.btn-view:hover,
+.btn-edit:hover {
+    background-color: var(--hover);
+}
+
+.btn-meassure-record {
+    background-color: var(--white);
+    border: none;
+    cursor: pointer;
 }
 
 .text-left {
@@ -143,46 +191,94 @@ a.btn-outline:hover {
     vertical-align: middle;
 }
 
+.text-center {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.text-right {
+    text-align: right;
+    vertical-align: middle;
+}
+
 span.red {
     color: var(--red);
 }
 
+.separator-line {
+    height: 10px;
+    background-color: var(--background);
+}
+
 .alert {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  min-width: 300px;
-  max-width: 500px;
-  padding: 15px 20px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 500;
-  text-align: center;
-  z-index: 9999;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  opacity: 0;
-  animation: fadeInOut 4s forwards;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 300px;
+    max-width: 500px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    z-index: 9999;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    opacity: 0;
+    animation: fadeInOut 4s forwards;
 }
 
 .alert-success {
-  background-color: #d1e7dd;
-  color: #0f5132;
-  border: 1px solid #badbcc;
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
 }
 
 .alert-danger {
-  background-color: #f8d7da;
-  color: #842029;
-  border: 1px solid #f5c2c7;
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
 }
 
 @keyframes fadeInOut {
-  0% { opacity: 0; transform: translate(-50%, -20px); }
-  10% { opacity: 1; transform: translate(-50%, 0); }
-  90% { opacity: 1; transform: translate(-50%, 0); }
-  100% { opacity: 0; transform: translate(-50%, -20px); }
+    0% { opacity: 0; transform: translate(-50%, -20px); }
+    10% { opacity: 1; transform: translate(-50%, 0); }
+    90% { opacity: 1; transform: translate(-50%, 0); }
+    100% { opacity: 0; transform: translate(-50%, -20px); }
 }
+
+div.pagination {
+    margin-top: 3em;
+    padding: 0 1em;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+div.pagination ul {
+    list-style: none;
+
+    display: flex;
+    flex-wrap: nowrap;
+    column-gap: 0.5em;
+}
+
+div.pagination ul li {
+    text-decoration: none;
+    color: var(--primary);    
+}
+
+div.pagination ul li.active a {
+    color: var(--red);
+}
+
+div.pagination ul li a {
+    padding: 1em;
+    background-color: var(--background);
+    border: 1px solid var(--gray-outline);
+    border-radius: 5px;
+}
+
 
 /********************************************************************************************/
 /* aside */
@@ -272,7 +368,7 @@ span.red {
     padding: 2em 2em 6em 2em;
 }
 
-.header {
+.header-content  {
     width: auto;
     height: 10vh;
     background-color: var(--background);
@@ -282,6 +378,10 @@ span.red {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.header-content h1 {
+    font-size: 1.3rem;
 }
 
 .a-profile {
@@ -307,6 +407,100 @@ span.red {
     height: 100%;
 }
 
+.a-profile .mode {
+    color: var(--red);
+}
+
+
+/********************************************************************************************/
+/* index page */
+/********************************************************************************************/
+
+.main-welcome {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+}
+
+.section-welcome-app {
+    width: 40%;
+    height: 100%;
+    background-color: var(--primary);
+}
+
+.section-welcome-app div.logo {
+    margin-top: 5em;
+    text-align: center;
+}
+
+.section-welcome-app div.logo img {
+    width: 200px;
+}
+
+.section-welcome-app div.app-name span {
+    display: block;
+    font-size: 1.5rem;
+    color: var(--text-gray);
+    text-align: center;
+    margin-top: 0.5em;
+    padding: 1em;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.section-welcome-app h2 {
+    margin: 4em 5em;
+    color: var(--text-gray);
+    text-align: center;
+}
+
+.section-enter-mode {
+    width: 60%;
+    height: 100%;
+    padding-left: 7em;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.section-enter-mode h1 {
+    margin-bottom: 2em;
+}
+
+.section-enter-mode div.enter-mode-options {
+    margin-top: 1em;
+}
+
+.section-enter-mode a.btn-enter-mode {
+    width: 200px;
+    height: 200px;
+    background-color: var(--white);
+    color: var(--primary);
+    padding-top: 4em;
+    margin-right: 2em;
+    border: 1px solid var(--text-light);
+    border-radius: 10px;
+    text-align: center;
+
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-enter-mode a.btn-enter-mode:hover {
+    background-color: var(--hover);
+    border: 1px solid var(--primary);
+}
+
+.section-enter-mode a.btn-enter-mode i {
+    font-size: 2rem;
+}
+
+.section-enter-mode a.btn-enter-mode h3 {
+    margin-top: 1em;
+}
+
 
 /********************************************************************************************/
 /* patients page */
@@ -316,51 +510,43 @@ span.red {
     margin-top: 3em;
 }
 
-.section-list-patients > div {
+.section-list-patients .container-search {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.section-list-patients div button {
-    color: var(--text-normal);
-    background-color: var(--white);
-    padding: 0.5em 1em;
-    border: 1px solid var(--primary);
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.section-list-patients div button:hover {
-    background-color: var(--primary-hover);
-}
-
-.section-list-patients div button i {
+.section-list-patients .container-search button i {
     color: var(--primary);
     margin-right: 0.5em;
 }
 
-.section-list-patients div .search {
+.section-list-patients .container-search search {
     padding: 0.5em 1em;
     border: 1px solid var(--text-gray);
     border-radius: 10px;
 }
 
-.section-list-patients div .search form {
+.section-list-patients .container-search search form {
     display: inline-flex;
     align-items: center;
 }
 
-.section-list-patients div .search form i {
+.section-list-patients .container-search search form i {
     margin-right: 0.5em;
 }
 
-.section-list-patients div .search form input {
+.section-list-patients .container-search search form input {
     border: none;
 }
 
-.section-list-patients div .search form input:focus {
+.section-list-patients .container-search search form input:focus {
     outline: none;
+}
+
+.section-list-patients .container-search-results {
+    margin-top: 1em;
+    padding: 0 1em;
 }
 
 .table {
@@ -486,3 +672,305 @@ span.red {
 .btn-save i {
     margin-right: 0.5em;
 }
+
+
+/********************************************************************************************/
+/* patient-details page */
+/********************************************************************************************/
+
+.section-patient-details {
+    margin-top: 3em;
+    margin-bottom: 3em;
+    padding: 0 1em;
+}
+
+.section-patient-details div.patient {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2em;
+}
+
+.section-patient-details div.patient .buttons {
+    display: flex;
+    column-gap: 1em;
+}
+
+.section-patient-details div.info {
+    margin-top: 2em;
+
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    column-gap: 2em;
+}
+
+.section-patient-details div.info div {
+    display: flex;
+    align-items: center;
+    column-gap: 1em;
+}
+
+.section-patient-details div.info div:hover {
+    background-color: var(--primary-hover);
+    border: 1px solid var(--primary);
+}
+
+.section-patient-details div.info .age,
+.section-patient-details div.info .gender,
+.section-patient-details div.info .height,
+.section-patient-details div.info .weight {
+    width: 150px;
+    height: 150px;
+    padding: 1em;
+    border: 1px solid var(--gray-outline);
+    border-radius: 75px;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 1em;
+}
+
+.section-patient-details div.info .age i,
+.section-patient-details div.info .gender i,
+.section-patient-details div.info .height i,
+.section-patient-details div.info .weight i{
+    font-size: 2.5rem;
+    color: var(--gray);
+}
+
+.section-patient-details div.info button i {
+    margin-right: 0.5em;
+}
+
+.section-patient-intakes {
+    margin-top: 2em;
+}
+
+.section-patient-intakes .btn-new {
+    margin-top: 2em;
+}
+
+.section-patient-intakes .btn-new i {
+    margin-right: 0.5em;
+}
+
+#modalInfoPatient {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;   
+    z-index: 500;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+ 
+#modalInfoPatient .container-info-patient {
+    width: 30%;
+    height: 100%;
+    background-color: var(--white);
+    margin-left: auto;
+    margin-right: 0;
+    padding: 2em;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+}
+
+#modalInfoPatient .container-info-patient div.heading {
+    margin-bottom: 2em;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#modalInfoPatient .heading h2 {
+    color: var(--primary);
+}
+
+#modalInfoPatient .close-modal {
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+#modalInfoPatient .close-modal:hover {
+    color: var(--red);
+}
+
+#modalInfoPatient .info-principal,
+#modalInfoPatient .info-extra {
+    margin: 1em 0;
+}
+
+#modalInfoPatient .info-principal p,
+#modalInfoPatietn .info-extra p {
+    margin-bottom: 0.5em;
+}
+
+#modalInfoPatient .info-principal p strong,
+#modalInfoPatient .info-extra p strong {
+    margin-right: 0.5em;
+}
+
+.modal-confirm-delete {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 600;
+}
+
+.modal-confirm-delete .container-content {
+    width: 400px;
+    background-color: var(--white);
+    padding: 3em 2em;
+    border-radius: 10px;
+    margin: 100px auto 0 auto;
+    text-align: center;
+}
+
+.modal-confirm-delete .container-content div.buttons {
+    margin-top: 2em;
+
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+}
+
+.btn-confirm-delete {
+    background-color: var(--red);
+    color: var(--white);
+    padding: 0.4em 1em;
+    border: 1px solid var(--red);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-confirm-delete:hover {
+    background-color: var(--red-hover);
+}
+
+.btn-cancel {
+    background-color: var(--white);
+    color: var(--text-light);
+    padding: 0.4em 1em;
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-cancel:hover {
+    background-color: var(--hover);
+}
+
+
+/********************************************************************************************/
+/* patient-details-edit page */
+/********************************************************************************************/
+
+.section-edit-patient { 
+    margin-top: 2em;
+    padding: 1em;
+}
+
+.section-edit-patient form .info-principal,
+.section-edit-patient form .info-extra {
+    width: 60%;
+}
+
+.section-edit-patient form .info-principal div,
+.section-edit-patient form .info-extra div {
+    margin-bottom: 1em;
+
+    display: flex;
+    align-items: center;
+}
+
+.section-edit-patient form div label {
+    width: 200px;
+    margin-right: 0.5em;
+}
+
+.section-edit-patient form div input,
+.section-edit-patient form div select {
+    width: 200px;
+    margin-right: 1em;
+    padding: 0.5em;
+    border: 1px solid var(--text-light);
+    border-radius: 5px;
+}
+
+.section-edit-patient form input[type="submit"] {
+    background-color: var(--blue);
+    color: var(--white);
+    padding: 0.5em 3em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.section-edit-patient form input[type="submit"]:hover {
+    background-color: var(--blue-hover);
+}
+
+.section-edit-patient form div.separator-line {
+    margin: 2em 0;
+}
+
+
+
+/********************************************************************************************/
+/* foods-catalog page */
+/********************************************************************************************/
+
+.section-foods-catalog {
+    margin-top: 3em;
+}
+
+.section-foods-catalog .tabs a {
+    text-decoration: none;
+    color: var(--primary);
+    padding: 1em;
+    border-radius: 15px 15px 0 0;
+}
+
+.section-foods-catalog .tabs a:hover {
+    background-color: var(--primary-hover)  ;
+}
+
+.section-foods-catalog .tabs a.active {
+    background-color: var(--primary-hover);
+}
+
+
+/********************************************************************************************/
+/* foods-user page */
+/********************************************************************************************/
+
+.section-foods-user {
+    margin-top: 3em;
+}
+
+.section-foods-user .tabs a {
+    text-decoration: none;
+    color: var(--primary);
+    padding: 1em;
+    border-radius: 15px 15px 0 0;
+}
+
+.section-foods-user .tabs a:hover {
+    background-color: var(--primary-hover)  ;
+}
+
+.section-foods-user .tabs a.active {
+    background-color: var(--primary-hover);
+}
+
+.section-foods-user .content {
+    margin-top: 3em;
+}
+
+

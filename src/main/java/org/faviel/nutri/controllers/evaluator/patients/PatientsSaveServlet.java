@@ -1,4 +1,4 @@
-package org.faviel.nutri.controllers.application;
+package org.faviel.nutri.controllers.evaluator.patients;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,10 +17,10 @@ import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet("/application/patients/save")
-public class PatientsServletSave extends HttpServlet {
+@WebServlet("/mode-evaluator/patients/save")
+public class PatientsSaveServlet extends HttpServlet {
 
-    private static final Logger logger = Logger.getLogger(PatientsServletSave.class.getName());
+    private static final Logger logger = Logger.getLogger(PatientsSaveServlet.class.getName());
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -50,12 +50,12 @@ public class PatientsServletSave extends HttpServlet {
 
         try (Connection conn = MSSQLConnection.getConnection()) {
             patientDAO.save(conn, patient);
-            req.getSession().setAttribute("success-message","Se ha guardado correctamente");
+            req.getSession().setAttribute("successMessage","Se ha guardado correctamente");
         } catch (SQLException e) {
-            logger.log(Level.SEVERE, "Error al guardar el registro del paciente", e);
-            req.getSession().setAttribute("error-message", "Error al guardar el registro");
+            logger.log(Level.SEVERE, "Error al guardar el registro", e);
+            req.getSession().setAttribute("errorMessage", "Error al guardar el registro");
         }
 
-        resp.sendRedirect(req.getContextPath() + "/application/patients");
+        resp.sendRedirect(req.getContextPath() + "/mode-evaluator/patients");
     }
 }

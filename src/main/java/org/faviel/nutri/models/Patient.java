@@ -1,6 +1,7 @@
 package org.faviel.nutri.models;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Patient {
 
@@ -10,6 +11,7 @@ public class Patient {
     private String matLastname;
     private String gender;
     private LocalDate birth;
+    private Integer age;
     private Integer height;
     private Double weight;
     private String organization;
@@ -66,6 +68,11 @@ public class Patient {
 
     public LocalDate getBirth() {
         return birth;
+    }
+
+    public Integer getAge() {
+        if (birth == null) return null;
+        return Period.between(birth, LocalDate.now()).getYears();
     }
 
     public void setBirth(LocalDate birth) {

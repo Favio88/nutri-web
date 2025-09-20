@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface IDAO<T> {
 
-    List<T> getAll(Connection conn) throws SQLException;
+    List<T> getAllIncludingInactive(Connection conn) throws SQLException;
+
+    List<T> getAllActive(Connection conn) throws SQLException;
 
     T getById(Connection conn, Integer id) throws SQLException;
 
@@ -17,6 +19,10 @@ public interface IDAO<T> {
     void update(Connection conn, T o) throws SQLException;
 
     void delete(Connection conn, Integer id) throws SQLException;
+
+    void softDelete(Connection conn, Integer id) throws SQLException;
+
+    List<T> search(Connection conn, String value) throws SQLException;
 
     List<T> find(Connection conn, String fieldName, Object value) throws SQLException;
 

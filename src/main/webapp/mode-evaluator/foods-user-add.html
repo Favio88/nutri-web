@@ -1,0 +1,296 @@
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutri | Agregar nuevo alimento</title>
+
+    <!-- Fontawesome icons -->
+    <script src="https://kit.fontawesome.com/c09ae347fc.js" crossorigin="anonymous"></script>
+
+    <!-- CSS -->
+    <!--<link rel="stylesheet" href="<%= request.getContextPath() %>/css/styles.css">-->
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!-- JustValidate library -->
+    <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js"></script>
+
+</head>
+<body>
+    
+    <aside class="sidebar">
+        <div class="container-nutri-logo">
+            <img src="<%= request.getContextPath() %>/images/logo-nutri-white-small.png" alt="Logotipo de...">
+            <span>Nombre de la app</span>
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="<%= request.getContextPath() %>/mode-evaluator/profile"><i class="fa-regular fa-circle-user"></i><p>Mi perfil</p></a></li>
+                <li><a href="<%= request.getContextPath() %>/mode-evaluator/patients"><i class="fa-solid fa-person"></i><p>Pacientes</p></a></li>
+                <li><a href="<%= request.getContextPath() %>/mode-evaluator/foods-catalog" class="active"><i class="fa-solid fa-utensils"></i><p>Alimentos</p></a></li>
+            </ul>
+            <ul>
+                <li><a href="<%= request.getContextPath() %>/logout" class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i>Cerrar sesión</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="header-content">
+            <h1>Agregar nuevo alimento</h1>
+            <a href="<%= request.getContextPath() %>/mode-evaluator/profile" title="Ir al perfil" class="a-profile">
+                <p>FAVIO</p>
+                <i class="fa-regular fa-circle-user"></i>
+                <p class="mode">EVALUADOR</p>
+            </a>
+        </header>
+        <section class="section-add-food">
+            <form action="<%= request.getContextPath() %>" method="POST">
+                <h2>Descripción</h2>
+                <div class="description">
+                    <div>
+                        <label for="">Nombre</label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div>
+                        <label for="">Grupo</label>
+                        <select name="group-id">
+                            <option value="">--Seleccione el grupo nutricional--</option>
+                            <option value="Azúcar, chocolate y derivados">Azúcar, chocolate y derivados</option>
+                            <option value="Bebidas no lácteas">Bebidas no lácteas</option>
+                            <option value="Cárnicos y derivados">Cárnicos y derivados</option>
+                            <option value="Cereales y derivados">Cereales y derivados</option>
+                            <option value="Frutas y derivados">Frutas y derivados</option>
+                            <option value="Grasas y aceites">Grasas y aceites</option>
+                            <option value="Huevos y derivados">Huevos y derivados</option>
+                            <option value="Lácteos y derivados">Lácteos y derivados</option>
+                            <option value="Legumbres, semillas, frutos secos y derivados">Legumbres, semillas, frutos secos y derivados</option>
+                            <option value="Misceláneos">Misceláneos</option>
+                            <option value="Pescados y comida del mar">Pescados y comida de mar</option>
+                            <option value="Productos de uso nutricional específico">Productos de uso nutricional específico</option>
+                            <option value="Verduras y hortalizas y derivados">Verduras y hortalizas y derivados</option>
+                        </select>
+                      </div>
+                </div>
+
+                <h2>Porción</h2>
+                <div class="portion">
+                    <div>
+                        <label for="">Cantidad</label>
+                        <input type="number" name="quantity" required>
+                    </div>
+                    <div>
+                        <label for="measure">Unidad de medida</label>
+                        <select name="measure-id" required>
+                            <option value="">--Seleccione la unidad de medida--</option>
+                            <option value="unit">unidad</option>
+                            <option value="g">g</option>
+                            <option value="ml">ml</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="">Energía (kcal)</label>
+                        <input type="number" name="kcal">
+                    </div>
+                </div>
+                
+                <h2>Información nutricional</h2>
+                <h3>Generales</h3>
+                <div class="nutritional-general">
+                    <div>
+                        <label for="fats-tot">Grasas totales (g)</label>
+                        <input type="number" min="0" name="fats-tot">
+                    </div>
+                    <div>
+                        <label for="fats-sat">Grasas saturadas (g)</label>
+                        <input type="number" min="0" name="fats-sat">
+                    </div>
+                    <div>
+                        <label for="fats-trans">Grasas trans (mg?)</label>
+                        <input type="number" min="0" name="fats-trans">
+                    </div>
+                    <div>
+                        <label for="cholesterol">Colesterol (mg)</label>
+                        <input type="number" min="0" name="cholesterol">
+                    </div>
+                    <div>
+                        <label for="carbohydrates">Carbohidratos (g)</label>
+                        <input type="number" min="0" name="carbohydrates">
+                    </div>
+                    <div>
+                        <label for="fiber">Fibra (g)</label>
+                        <input type="number" min="0" name="fiber">
+                    </div>
+                    <div>
+                        <label for="sugars">Azúcares (g)</label>
+                        <input type="number" min="0" name="sugars">
+                    </div>
+                    <div>
+                        <label for="protein">Proteína (g)</label>
+                        <input type="number" min="0" name="protein">
+                    </div>
+                    <div>
+                        <label for="water">Agua (g?)</label>
+                        <input type="number" min="0" name="water">
+                    </div>
+                    <div>
+                        <label for="alcohol">Alcohol (g?)</label>
+                        <input type="number" min="0" name="alcohol">
+                    </div>
+                </div>
+
+                <h3>Vitaminas</h3>
+                <div class="nutritional-vitamins">
+                    <div>
+                        <label for="vitamin-a">Vitamina A (μg retinol eq)?</label>
+                        <input type="number" min="0" name="vitamin-a">
+                    </div>
+                    <div>
+                        <label for="vitamin-b1">Vitamina B1 (Tiamina) (mg)</label>
+                        <input type="number" min="0" name="vitamin-b1">
+                    </div>
+                    <div>
+                        <label for="vitamin-b2">Vitamina B2 (Riboflavina) (mg)</label>
+                        <input type="number" min="0" name="vitamin-b2">
+                    </div>
+                    <div>
+                        <label for="vitamin-b3">Vitamina B3 (Niacina) (mg)</label>
+                        <input type="number" min="0" name="vitamin-b3">
+                    </div>
+                    <div>
+                        <label for="vitamin-b5">Vitamina B5 (Ácido pantoténico) (mg)</label>
+                        <input type="number" min="0" name="vitamin-b5">
+                    </div>
+                    <div>
+                        <label for="vitamin-b6">Vitamina B6 (Piridoxina) Total? (mg)</label>
+                        <input type="number" min="0" name="vitamin-b6">
+                    </div>
+                    <div>
+                        <label for="vitamin-b7">Vitamina B7 (Biotina) (μg)</label>
+                        <input type="number" min="0" name="vitamin-b7">
+                    </div>
+                    <div>
+                        <label for="vitamin-b9">Vitamina B9 (Folato) (μg)</label>
+                        <input type="number" min="0" name="vitamin-b9">
+                    </div>
+                    <div>
+                        <label for="vitamin-b12">Vitamina B12 (Cobalamina) (μg)</label>
+                        <input type="number" min="0" name="vitamin-b12">
+                    </div>
+                    <div>
+                        <label for="vitamin-c">Vitamina C (Ácido ascórbico) (mg)</label>
+                        <input type="number" min="0" name="vitamin-c">
+                    </div>
+                    <div>
+                        <label for="vitamin-d">Vitamina D (Colecalciferol) (μg)</label>
+                        <input type="number" min="0" name="vitamin-d">
+                    </div>
+                    <div>
+                        <label for="vitamin-e">Vitamina E (Tocoferol) (mg)</label>
+                        <input type="number" min="0" name="vitamin-e">
+                    </div>
+                </div>
+            
+                <h3>Minerales</h3>
+                <div class="nutritional-minerals">
+                    <div>
+                        <label for="calcium">Calcio (mg)</label>
+                        <input type="number" min="0" name="calcium">    
+                    </div>
+                    <div>
+                        <label for="iron">Hierro (mg)</label>
+                        <input type="number" min="0" name="iron">    
+                    </div>
+                    <div>
+                        <label for="magnesium">Magnesio (mg)</label>
+                        <input type="number" min="0" name="magnesium">    
+                    </div>
+                    <div>
+                        <label for="potassium">Potasio (mg)</label>
+                        <input type="number" min="0" name="potassium">    
+                    </div>
+                    <div>
+                        <label for="sodium">Sodio (mg)</label>
+                        <input type="number" min="0" name="sodium">    
+                    </div>
+                    <div>
+                        <label for="zinc">Zinc (mg)</label>
+                        <input type="number" min="0" name="zinc">    
+                    </div>
+                    <div>
+                        <label for="phosphorus">Fósforo (mg)</label>
+                        <input type="number" min="0" name="phosphorus">    
+                    </div>
+                    <div>
+                        <label for="iodine">Yodo (μg)</label>
+                        <input type="number" min="0" name="iodine">    
+                    </div>
+                    <div>
+                        <label for="selenium">Selenio (μg)</label>
+                        <input type="number" min="0" name="selenium">    
+                    </div>
+                </div>
+
+                <h3>Ácidos grasos</h3>
+                <div class="nutritional-fats">
+                    <div>
+                        <label for="fats-mono">Ácidos grasos monoinsaturados (g)</label>
+                        <input type="number" min="0" name="fats-mono">    
+                    </div>
+                    <div>
+                        <label for="fats-poli">Ácidos grasos poliinsaturados (g)</label>
+                        <input type="number" min="0" name="fats-poli">
+                    </div>
+                    <div>
+                        <label for="fats-12-0">Ácido graso 12:0 (g)</label>
+                        <input type="number" min="0" name="fats-12-0">
+                    </div>
+                    <div>
+                        <label for="fats-14-0">Ácido graso 14:0 (g)</label>
+                        <input type="number" min="0" name="fats-14-0">
+                    </div>
+                    <div>
+                        <label for="fats-16-0">Ácido graso 16:0 (g)</label>
+                        <input type="number" min="0" name="fats-16-0">
+                    </div>
+                    <div>
+                        <label for="fats-18-0">Ácido graso 18:0 (g)</label>
+                        <input type="number" min="0" name="fats-18-0">
+                    </div>
+                    <div>
+                        <label for="fats-18-1">Ácido graso 18:1 N-9 (g)</label>
+                        <input type="number" min="0" name="fats-18-1">
+                    </div>
+                    <div>
+                        <label for="fats-18-2">Ácido graso 18:2 (g)</label>
+                        <input type="number" min="0" name="fats-18-2">
+                    </div>
+                    <div>
+                        <label for="fats-18-3">Ácido graso 18:3 (g)</label>
+                        <input type="number" min="0" name="fats-18-3">
+                    </div>
+                    <div>
+                        <label for="fats-20-4">Ácido graso 20:4 N-6 (g)</label>
+                        <input type="number" min="0" name="fats-20-4">
+                    </div>
+                    <div>
+                        <label for="fats-20-5">Ácido graso 20:5 (g)</label>
+                        <input type="number" min="0" name="fats-20-5">
+                    </div>
+                    <div>
+                        <label for="fats-22-6">Ácido graso 22:6 N-3 (g)</label>
+                        <input type="number" min="0" name="fats-22-6">
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
+
+</body>
+</html>

@@ -5,14 +5,14 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=de vice-width, initial-scale=1.0">
     <title>Nutri | Pacientes</title>
 
     <!-- Fontawesome icons -->
     <script src="https://kit.fontawesome.com/c09ae347fc.js" crossorigin="anonymous"></script>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/styles.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,30 +27,30 @@
 
     <% // Alert messages %>
     <%
-        String successMessage = (String) session.getAttribute("success-message");
-        String errorMessage = (String) session.getAttribute("error-message");
+        String successMessage = (String) session.getAttribute("successMessage");
+        String errorMessage = (String) session.getAttribute("errorMessage");
 
         if (successMessage != null || errorMessage != null) {
     %>
-            <div id="alertMessage" class='<%= successMessage != null ? "alert alert-success" : "alert alert-danger" %>'>
+            <div class='<%= successMessage != null ? "alert alert-success" : "alert alert-danger" %>'>
                 <%= successMessage != null ? successMessage : errorMessage %>
             </div>
     <%
-            session.removeAttribute("success-message");
-            session.removeAttribute("error-message");
+            session.removeAttribute("successMessage");
+            session.removeAttribute("errorMessage");
         }
     %>
     
     <aside class="sidebar">
         <div class="container-nutri-logo">
-            <img src="../images/logo-nutri-white-small.png" alt="Logotipo de...">
+            <img src="<%= request.getContextPath() %>/images/logo-nutri-white-small.png" alt="Logotipo de...">
             <span>Nombre de la app</span>
         </div>
         <nav class="nav">
             <ul>
-                <li><a href="<%= request.getContextPath() %>/application/profile.html"><i class="fa-regular fa-circle-user"></i><p>Mi perfil</p></a></li>
-                <li><a href="<%= request.getContextPath() %>/application/patients" class="active"><i class="fa-solid fa-person"></i><p>Pacientes</p></a></li>
-                <li><a href="<%= request.getContextPath() %>/application/foods.html"><i class="fa-solid fa-utensils"></i><p>Alimentos</p></a></li>
+                <li><a href="<%= request.getContextPath() %>/mode-evaluator/profile"><i class="fa-regular fa-circle-user"></i><p>Mi perfil</p></a></li>
+                <li><a href="<%= request.getContextPath() %>/mode-evaluator/patients" class="active"><i class="fa-solid fa-person"></i><p>Pacientes</p></a></li>
+                <li><a href="<%= request.getContextPath() %>/mode-evaluator/foods-catalog"><i class="fa-solid fa-utensils"></i><p>Alimentos</p></a></li>
             </ul>
             <ul>
                 <li><a href="<%= request.getContextPath() %>/logout" class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i>Cerrar sesión</a></li>
@@ -59,34 +59,47 @@
     </aside>
 
     <main class="main-content">
-        <header class="header">
+        <header class="header-content">
             <h1>Pacientes</h1>
-            <a href="<%= request.getContextPath() %>/application/profile.html" title="Ir al perfil" class="a-profile">
+            <a href="<%= request.getContextPath() %>/mode-evaluator/profile" title="Ir al perfil" class="a-profile">
                 <p>FAVIO</p>
                 <i class="fa-regular fa-circle-user"></i>
+                <p class="mode">EVALUADOR</p>
             </a>
         </header>
+        <%
+            List<Patient> patients = (List<Patient>) request.getAttribute("patients");
+            String searchValue = (String) request.getAttribute("searchValue");
+        %>
         <section class="section-list-patients">
-            <div>
-                <button id="newPatient"><i class="fa-solid fa-plus"></i>Nuevo paciente</button>
-                <search class="search">
-                    <form action="<%= request.getContextPath() %>/application/patients/search-patients" method="GET">
+            <div class="container-search">
+                <button id="newPatient" class="btn-new"><i class="fa-solid fa-plus"></i>Nuevo paciente</button>
+                <search>
+                    <form action="<%= request.getContextPath() %>/mode-evaluator/patients/search" method="GET">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="search" name="q" placeholder="Buscar paciente">
+                        <input type="search" name="q" value='<%= searchValue != null ? searchValue : "" %>' placeholder="Buscar paciente">
                     </form>
                 </search>
             </div>
             <%
-                List<Patient> patients = (List<Patient>) request.getAttribute("patients");
+                if (searchValue != null && patients != null) {
+            %>
+                    <div class="container-search-results">
+                        <p><strong><%= patients.size() %> registro(s) encontrado(s) en la búsqueda</strong></p>
+                    </div>
+            <%
+                }
             %>
             <table class="table">
                 <thead>
                     <tr>
                         <th class="text-left">Paciente</th>
                         <th>Fecha de nacimiento</th>
+                        <th>Edad</th>
                         <th>Altura (cm)</th>
                         <th>Peso (kg)</th>
                         <th>Organización</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -103,8 +116,10 @@
                                         %>
                                     </td>
                                     <td class="text-center"><%= p.getBirth() != null ? p.getBirth() : "--" %></td>
+                                    <td class="text-center"><%= p.getAge() != null ? p.getAge() : "--" %></td>
                                     <td class="text-center"><%= (p.getHeight() != null && p.getHeight() != 0) ? p.getHeight() : "--" %></td>
-                                    <td class="text-center"><%= (p.getWeight() != null && p.getWeight() != 0.0) ? p.getWeight() : "--" %></td>                                    <td class="text-center"><%= p.getOrganization() != null ? p.getOrganization() : "--" %></td>
+                                    <td class="text-center"><%= (p.getWeight() != null && p.getWeight() != 0.0) ? p.getWeight() : "--" %></td>
+                                    <td class="text-center"><%= p.getOrganization() != null ? p.getOrganization() : "--" %></td>
                                 </tr>
                     <%
                             }
@@ -112,6 +127,40 @@
                     %>
                 </tbody>
             </table>
+            <div class="pagination">
+                <%
+                    Integer totalPatients = (Integer) request.getAttribute("totalPatients");
+                    Integer currentPage = (Integer) request.getAttribute("currentPage");
+                    Integer totalPages = (Integer) request.getAttribute("totalPages");
+                    Integer pageSize = (Integer) request.getAttribute("pageSize");
+
+                    if (totalPatients != null && totalPages != null && totalPages > 0) {
+                        int start = (currentPage - 1) * pageSize + 1;
+                        int end = Math.min(currentPage * pageSize, totalPatients);
+                %>
+                        <p><strong>Mostrando <%= start %> al <%= end %> de <%= totalPatients %> registros</strong></p>
+
+                        <nav>
+                            <ul>
+                                <% if (currentPage > 1) { %>
+                                    <li><a href="?pageNumber=<%= currentPage - 1 %>" class="link">Anterior</a></li>
+                                <% } %>
+
+                                <% for (int i = 1; i <= totalPages; i++) { %>
+                                    <li class="<%= i == currentPage ? "active" : "" %>">
+                                        <a href="?pageNumber=<%= i %>" class="link"><%= i %></a>
+                                    </li>
+                                <% } %>
+
+                                <% if (currentPage < totalPages) { %>
+                                    <li><a href="?pageNumber=<%= currentPage + 1 %>" class="link">Siguiente</a></li>
+                                <% } %>
+                            </ul>
+                        </nav>
+                <%
+                    }
+                %>
+            </div>
         </div>
     </main>
 
@@ -126,22 +175,22 @@
             <h3>Datos principales</h3>
             <small>Más adelante podrá agregar más datos y detalles del paciente (dirección, teléfono, etc).</small>
 
-            <form id="newPatientForm" action="<%= request.getContextPath() %>/application/patients/save" method="POST">
+            <form id="newPatientForm" action="<%= request.getContextPath() %>/mode-evaluator/patients/save" method="POST">
                 
-                <div class="container-input" class="container-input">
-                    <label for="name">Nombre<span class="red">*</span>:</label>
-                    <input type="text" name="name" placeholder="Nombre" required>
+                <div class="container-input">
+                    <label for="">Nombre(s)<span class="red">*</span>:</label>
+                    <input type="text" name="name" placeholder="Nombre(s)" required>
                 </div>
-                <div class="container-input" class="container-input">
-                    <label for="pat-lastname">Apellido paterno<span class="red">*</span>:</label>
+                <div class="container-input">
+                    <label for="">Apellido paterno<span class="red">*</span>:</label>
                     <input type="text" name="pat-lastname" placeholder="Apellido paterno" required>
                 </div>
                 <div class="container-input">
-                    <label for="mat-lastname">Apellido materno:</label>
+                    <label for="">Apellido materno:</label>
                     <input type="text" name="mat-lastname" placeholder="Apellido materno">
                 </div>
                 <div class="container-input">
-                    <label for="gender">Género:<span class="red">*</span></label>
+                    <label for="">Género:<span class="red">*</span></label>
                     <select name="gender">
                         <option value="">--Seleccione una opción--</option>
                         <option value="Hombre">Hombre</option>
@@ -149,19 +198,19 @@
                     </select>
                 </div>
                 <div class="container-input">
-                    <label for="birth">Fecha de nacimiento:</label>
+                    <label for="">Fecha de nacimiento:</label>
                     <input type="date" name="birth">
                 </div>
                 <div class="container-input">
-                    <label for="height">Altura (cm)</label>
+                    <label for="">Altura (cm)</label>
                     <input type="number" name="height" step="1" placeholder="Altura">
                 </div>
                 <div class="container-input">
-                    <label for="weight">Peso (kg):</label>
+                    <label for="">Peso (kg):</label>
                     <input type="number" name="weight" placeholder="Peso">
                 </div>
                 <div class="container-input">
-                    <label for="organization">Organización o grupo de evaluación (opcional)</label>
+                    <label for="">Organización o grupo de evaluación (opcional)</label>
                     <input type="text" name="organization" placeholder="Nombre de organización o grupo">
                 </div>
 
@@ -186,7 +235,7 @@
                 const row = event.target.closest('tr');
                 if (row) {
                     const id = row.dataset.id;
-                    window.location.href = '<%= request.getContextPath() %>/application/patient-details.html?id=' + id;
+                    window.location.href = '<%= request.getContextPath() %>/mode-evaluator/patient-details?id=' + id;
                 }
             });
 
